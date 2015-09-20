@@ -95,7 +95,7 @@ a {
 }
 
 a:active,
-a:hover {
+a:hover  {
     outline: 0;
 }
 
