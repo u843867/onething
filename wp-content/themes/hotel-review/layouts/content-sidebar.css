@@ -1,0 +1,77 @@
+/*
+ * Theme Name: hotels
+ *
+ * Layout: Content-Sidebar
+ *
+ * Learn more: https://developer.wordpress.org/themes/basics/template-files/
+*/
+
+.content-area {
+    width: 100%;
+    //float: left;
+    //padding-left: 6em;
+/*    margin-left: -380px;
+    padding-left: 380px;*/
+}
+
+.col-md-8{
+    //padding-right: 4em;
+}
+.col-lg-3{
+    padding-left: 3.5em;
+    //padding-right: 0em;
+    //float: left;
+    
+}
+
+.site-content .widget-area {
+    //width: 380px;
+    float: left;
+    padding: 4rem 3rem 4rem 1rem;
+    background: #fff;
+    background: hsl(0, 0%, 100%);
+}
+
+.site-content {
+    padding-bottom: 4em;
+    background: #b2b2b2;
+}
+.single .site-content,
+.page .site-content { 
+    background: #fff; 
+    background: hsl(0, 0%, 100%);
+}
+
+/*.widget-area{
+    padding-left: 5em;
+}*/
+
+.site-footer {
+    clear: both;
+    width: 100%;
+}
+
+.entry-header,
+.entry-content,
+//.entry-meta,
+.entry-footer,
+.tag-links,
+.post-navigation,
+.comments-area,
+.paging-navigation {
+    position: relative;
+    max-width: 780px;
+    max-width: 78rem;
+    padding: 0 4rem;
+    margin: 0 auto;
+}
+
+/*remove before launch
+
+.content-area {
+    background-color: aliceblue;
+}
+.widget-area {
+    background-color: #09cafa;
+}*/
+

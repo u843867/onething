@@ -124,6 +124,8 @@ function justsaying_scripts() {
         
 	wp_enqueue_style( 'justsaying-fontawesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
         
+	 wp_enqueue_style('bxslider-style', get_template_directory_uri() . '/jquery.bxslider.css');
+        
 	
 
 	wp_enqueue_script( 'justsaying-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
@@ -134,6 +136,8 @@ function justsaying_scripts() {
     wp_enqueue_script('justsaying-superfish-settings', get_template_directory_uri() . '/js/superfish-settings.js', array('justsaying-superfish'), '20150810', true);
 
     wp_enqueue_script('justsaying-masonry-settings', get_template_directory_uri() . '/js/masonry-settings.js', array('masonry'), '20150810', true);
+    
+    wp_enqueue_script('justsaying-bxslider-settings', get_template_directory_uri() . '/js/bxslider.js', array(), '20150816', true);
 
 	wp_enqueue_script( 'justsaying-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20150810', true );
 	
@@ -145,6 +149,43 @@ function justsaying_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
+
+function create_Hotel_review() {
+    register_post_type( 'Hotel-reviews',
+        array('labels' => array('name' => 'Hotel Reviews','singular_name' => 'Hotel Reviewsie',
+                'add_new' => 'Add New Review','add_new_item' => 'Add New Hotel Review','edit' => 'Edit',
+                'edit_item' => 'Edit Hotel Review',
+                'new_item' => 'New Hotel Review',
+                'view' => 'View',
+                'view_item' => 'View Hotel Review',
+                'search_items' => 'Search Hotel Reviews',
+                'not_found' => 'No Hotel Reviews found',
+                'not_found_in_trash' => 'No Hotel Reviews found in Trash',
+                'parent' => 'Parent Hotel Review'
+            ),
+ 
+            'public' => true,
+            'menu_position' => 5,
+            'supports' => array('custom-fields' ),
+            'taxonomies' => array( '' ),
+            'menu_icon' => 'dashicons-schedule',
+            'has_archive' => true
+        )
+    );
+}
+
+
+add_filter( 'pre_get_posts', 'my_get_posts' );
+
+function my_get_posts( $query )   {
+
+	if ( is_home() && $query->is_main_query() )
+		$query->set( 'post_type', array( 'post', 'page', 'album', 'movie', 'quote' ) );
+
+	return $query;
+}
+
+
 add_action( 'wp_enqueue_scripts', 'justsaying_scripts' );
 
 /**

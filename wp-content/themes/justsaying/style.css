@@ -530,13 +530,16 @@ a:active {
 .main-navigation {
     clear: both;
     display: block;
-    float: left;
+    float: right;
     width: 100%;
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     background: #313131;
     background: hsl(0, 0%, 19%);
+    //margin: auto;
 }
+
+
 
 .main-navigation ul {
     display: none;
@@ -648,11 +651,13 @@ a:active {
     background: hsl(0, 0%, 19%);
 } 
 
-/* Small menu. */
-@media screen and (max-width: 600px) {
     button.menu-toggle{
         float: right;
     }
+
+/* Small menu. */
+@media screen and (max-width: 600px) {
+
 
     .main-navigation li { 
         clear:both;   
@@ -660,7 +665,6 @@ a:active {
     }
 
     
-
     button.menu-toggle,
     .main-navigation.toggled ul {
 
@@ -674,8 +678,22 @@ a:active {
         line-height: 3.75em;    
         /*float: right;*/
         clear: both;
+        //margin-left: 5px;
     }
 
+    .main-navigation li a { 
+		padding: 1.3em 2em; 
+	}
+
+	.main-navigation li li a { 
+		padding-left: 4em; 
+	}
+
+	.main-navigation li li li a { 
+		padding-left: 6em; 
+	}
+    
+    
     .menu-toggle{
 
         border-radius: 0;
@@ -718,9 +736,10 @@ a:active {
 
     .main-navigation ul ul,
     .main-navigation ul ul ul {
-        position: relative;
+        //position: relative;
+        position: initial;
         top: inherit;
-        left: 0;
+        left: 10px;
         display: block;
         float: none;
         background: #313131;
@@ -729,30 +748,33 @@ a:active {
 
     .main-navigation ul ul a { width: 100%; }
 
-    .main-navigation ul a:hover,
-    .main-navigation ul ul a:hover {
-        background: #4d4d4d;
-        background: hsl(0, 0%, 30%);
-    }
+.main-navigation ul a:hover,
+	.main-navigation ul ul a:hover {
+		background: #4d4d4d;
+		background: hsl(0, 0%, 30%);
+	}
 
-    .main-navigation .current_page_ancestor { background: inherit; }
+	.main-navigation .current_page_ancestor { background: inherit; }
 
-    .main-navigation ul ul .current_page_parent {
-        color: inherit;
-        background: inherit;
-    }
+	.main-navigation ul ul .current_page_parent {
+		color: inherit;
+		background: inherit;
+	}
 
-    .main-navigation .current_page_item > a,
-    .main-navigation .current_page_item > a:hover,
-    .main-navigation .current_page_item li:hover,
-    .main-navigation .current_page_parent .current_page_item > a  {
-        color: #fff;
-        color: hsl(0, 0%, 100%);
-        background: #4d4d4d;
-        background: hsl(0, 0%, 30%);    
-    }        
+	.main-navigation .current_page_item > a,
+	.main-navigation .current_page_item > a:hover,
+	.main-navigation .current_page_item li:hover,
+	.main-navigation .current_page_parent .current_page_item > a  {
+		color: #fff;
+		color: hsl(0, 0%, 100%);
+		background: #4d4d4d;
+		background: hsl(0, 0%, 30%);    
+	}       
 
 
+    	
+    
+    
 }       
 
 
@@ -879,6 +901,10 @@ the screen size is bigger than or equal to 37.5em*/
     font-size: 2rem;
 }
 
+.site-header{
+    margin: 0 -1em 0 -1em;
+}
+
 /*--------------------------------------------------------------
 # Clearings
 --------------------------------------------------------------*/
@@ -979,7 +1005,7 @@ the screen size is bigger than or equal to 37.5em*/
 }
 
 .site-header {
-    background-color: lightgreen;
+    background-color: #303030;
 }
 
 /*--------------------------------------------------------------

@@ -36,16 +36,16 @@
                     </div><!-- .site-branding -->
                 </div>   <!--#row (bootstrap) -->
                 
-                <div class="row">
-                    
-                <nav id="site-navigation" class="main-navigation" role="navigation">
-                    
-                    <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e('Primary Menu', 'justsaying'); ?></button>
-                    <?php wp_nav_menu(array('theme_location' => 'primary', 'menu_id' => 'primary-menu')); ?>
-                    
-                </nav><!-- #site-navigation -->
                 
-                </div>
+<!--                 <div class="main-nav-box">   
+                    <nav id="site-navigation" class="main-navigation" role="navigation">
+
+                        <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e('Primary Menu', 'justsaying'); ?></button>
+                        <?php wp_nav_menu(array('theme_location' => 'primary', 'menu_id' => 'primary-menu')); ?>
+
+                    </nav> #site-navigation 
+                </div>-->
+                
             </header><!-- #masthead -->
 
             <div id="content" class="site-content">

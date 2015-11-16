@@ -12,7 +12,7 @@
 ?>
 
 	</div><!-- #content -->
-
+<div class="row">
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-info">
                     <p>I AM A FOOTER</p>
@@ -21,6 +21,8 @@
 			<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'justsaying' ), 'justsaying', '<a href="http://underscores.me/" rel="designer">Justin Jones</a>' ); ?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
+        </div><!-- row -->
+
 </div><!-- #page -->
 
 <?php wp_footer(); ?>

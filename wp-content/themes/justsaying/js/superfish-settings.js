@@ -3,7 +3,12 @@
  */
 
 jQuery(document).ready(function($){
-	var breakpoint = 600;
+	
+  
+
+    
+    
+    var breakpoint = 600;
     var sf = $('ul.nav-menu');
 	
     if($(document).width() >= breakpoint){
