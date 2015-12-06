@@ -22,7 +22,7 @@
     <?php
     //get the url from the Hotel Review page.  Use the file_get_contents method to store the results in a variable.
     $hotel_array = (json_decode(file_get_contents(get_field('ean_hotel_information')), true));
-    var_dump($hotel_array);
+    //var_dump($hotel_array);
 
 
     $hotel_name = $hotel_array[HotelInformationResponse][HotelSummary][name];
@@ -36,6 +36,27 @@
     $tripadvisor_review_count = $hotel_array[HotelInformationResponse][HotelSummary][tripAdvisorReviewCount];
     $hotel_longitude = $hotel_array[HotelInformationResponse][HotelSummary][longitude];
     $hotel_latitude = $hotel_array[HotelInformationResponse][HotelSummary][latitude];
+    $hotel_amenities = $hotel_array[HotelInformationResponse][PropertyAmenities][PropertyAmenity];
+    $hotel_images = $hotel_array[HotelInformationResponse][HotelImages][HotelImage];
+    //var_dump($hotel_amenities);
+   // var_dump($hotel_images);
+    
+    
+    foreach ($hotel_amenities as $amenity){
+        foreach ($amenity as $item){
+            switch ($item){ 
+                case 2390:
+                    $hotel_wifi = true;  
+                case 14:
+                    $hotel_pool = true;   
+                case 51:
+                    $hotel_pets = true;   
+                case 2135:
+                    $hotel_sauna = true;   
+            }
+        }
+    }
+    
     ?>
 
 
@@ -64,18 +85,20 @@
 
 
     if ($hotel_name) {
+      
         echo '<div class="info-box">';
-        echo('<h1>' . $hotel_name . '<span class = "gold">' . $star . '</span>' . '</h1>');
-        echo('<span class = "blue"><i class="fa fa-location-arrow"></i></span>&nbsp' . " " . $hotel_address);
-        echo('<br>');
-        echo ('<p><img src=' . $hotel_tripadvisor . '> (based on <span class = "blue">' . $tripadvisor_review_count . '</span>  reviews)</p>');
-
-
+        
+            echo('<h1 class="hotel">' . $hotel_name . '<span class = "gold">' . $star . '</span>' . '</h1>');
+            echo('<p class = "address">' . $hotel_address . '</p>');
+            //echo('<br>');
+            echo ('<p><img src=' . $hotel_tripadvisor . '> (based on <span class = "blue">' . $tripadvisor_review_count . '</span>  reviews)</p>');
+        
         echo '</div>';
     }
 
     //if images have been added in the wordpress use them.
     if ($images) {
+        $img_src = 'wp';
         $images = array();
         for ($x = 1; $x <= 25; $x++) {
             $img = get_field('image' . $x);
@@ -88,26 +111,56 @@
     }
     //if images have not been added in wordpress use expedia's
     else {
-        $images = array();
-        for ($x = 1; $x <= 25; $x++) {
-            $img = get_field('image' . $x);
-            if ($img) {
-                $images[] = $img;
-            } else {
-                break;
-            }
-        }
+        //create array to store images in.
+        $images = array();  
+        //get size of the array
         
+
+        
+        
+        $count = 0;
+        foreach ($hotel_images as $image){ 
+                
+                $img = $image[url];
+                if ($img) {
+                  $img = str_replace('_b.jpg','_z.jpg',$img);
+                $images[] = $img;
+                $count++;
+                    if ($count > 18){
+                        break;
+                    }
+                } 
+                else {
+                    break;   
+            }
+           
+        }    
     }
     ?>
+        
+        <?php 
+        
+            if ($img_src == 'wp') {
+                $img_src = $image['sizes']['medium'];
+            } 
+            else {
+                $img_src = $images;
+            }
+                
+         ?>
 
     <br>
     <hr>
-    <!-- Fotorama -->
-    <p>fotorama gallery</p>
-    <div class="fotorama">
-        <?php foreach ($images as $image) { ?>        
-            <img src="<?php echo $image['sizes']['medium']; ?>">
+    <!-- Fotorama slider-->
+    <div class="fotorama"
+         data-width="100%"
+     data-ratio="800/600"
+     data-minwidth="200"
+     data-maxwidth="610"
+     data-minheight="150"
+     data-maxheight="100%">
+        <?php foreach ($img_src as $url) { ?>        
+            <img src=<?php echo $url; ?> />
         <?php } ?>
 
     </div>
