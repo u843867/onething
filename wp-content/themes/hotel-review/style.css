@@ -432,6 +432,34 @@ table {
 	width: 100%;
 }
 
+.hotel{
+    margin-bottom: 0.1em;
+}
+
+//add address icon to address elements
+
+ 
+/*replace the content value with the
+corresponding value from the list below*/
+ 
+.address:before {
+    content: "\f124";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+    color: #000;
+    font-size: 18px;
+    padding-right: 0.5em;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+    
+    
+    
+
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
@@ -1349,5 +1377,17 @@ object {
         #secondary {
             width: 100%;
         }
-        
-  
+     
+  .address:before {
+    content: "\f124";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+    color:#003399;
+    font-size: 18px;
+    padding-right: 0.5em;
+    top: 10px;
+    left: 0;
+}
