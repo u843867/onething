@@ -42,6 +42,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 # Media
 	## Captions
 	## Galleries
+# Google Maps
 # Footer
 --------------------------------------------------------------*/
 
@@ -297,6 +298,10 @@ p {
 	margin-bottom: 1.5em;
 }
 
+p.address  {
+    margin-bottom: 0em;
+}
+
 dfn,
 cite,
 em,
@@ -402,6 +407,11 @@ ol {
 
 ul {
 	list-style: disc;
+	list-style: inherit;
+}
+
+.fa-lg {
+    color: #009900;
 }
 
 ol {
@@ -434,6 +444,18 @@ table {
 
 .hotel{
     margin-bottom: 0.1em;
+    margin-top: 0.1em;
+}
+
+
+
+
+
+.row-top{
+    margin-bottom: -5em;
+}
+.row-slider{
+    margin-top: -6em;
 }
 
 //add address icon to address elements
@@ -744,27 +766,56 @@ a:active {
         height: 3em;
     }
     
-
+/*     .tripadvisor{
         
+        margin-top: 2em;
+        padding-top: 1em;
+        }*/
+        
+        p.address{
+            margin-bottom: 0.2em;
+        }
+        
+        .quickFacts li{
+            list-style: none;
+        }
+        
+
 }
 
 
 /*this media query only kicks in if the screen size is > 37.5em*/
 @media screen and (min-width: 37.5em) {
-	.menu-toggle {
-		display: none;
-	}
-	.main-navigation ul {
-		display: block;
-	}
-        .main-navigation{
-            padding-left: 13em;
-        }
-        
+    .menu-toggle {
+        display: none;
+    }
+    .main-navigation ul {
+        display: block;
+    }
+    .main-navigation{
+        padding-left: 13em;
+    }
+
+    .tripadvisor{
+        float: right;
+        margin-top: 0.8em;
+    }
+
+    .quickFacts li{
+        display: inline;
+        list-style: none;
+    }
+
+    .quickFacts{
+        padding-top: 1em;
+    }
 
 
 }
 
+         ul.facilities {
+            margin-bottom: 0em;
+        }
 
 .site-main .comment-navigation,
 .site-main .paging-navigation,
@@ -940,6 +991,15 @@ text-decoration: none;
    color: #C02020;
 }
 
+
+
+.info-box{
+    float: left;
+}
+
+.hotel {
+    //margin-top: 0.1em;
+}
 
 /*--------------------------------------------------------------
 # Widgets
@@ -1170,6 +1230,19 @@ text-decoration: none;
 
 
 /*--------------------------------------------------------------
+## Panel
+--------------------------------------------------------------*/
+.panel-heading span {
+    margin-top: -20px;
+    font-size: 15px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+
+/*--------------------------------------------------------------
 ## Asides
 --------------------------------------------------------------*/
 .blog .format-aside .entry-title,
@@ -1241,6 +1314,18 @@ iframe,
 object {
 	max-width: 100%;
 }
+
+/*--------------------------------------------------------------
+# Google Maps
+--------------------------------------------------------------*/
+#map {
+        width: 435px;
+        height: 250px;
+        background-color: #ffffff;
+      }
+
+
+
 
 /*--------------------------------------------------------------
 ## Captions

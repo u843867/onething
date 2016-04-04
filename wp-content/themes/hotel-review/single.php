@@ -36,7 +36,7 @@ get_header(); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-</div> <!-- #bootstrap col-md-8 -->
+</div> <!-- #bootstrap col-sm-12 col-md-7 col-lg-6 -->
 
     
 <div class="col-sm-12 col-md-4 col-lg-3">

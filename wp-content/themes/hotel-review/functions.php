@@ -144,6 +144,15 @@ function hotel_review_widgets_init() {
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
+	register_sidebar( array(
+		'name'          => esc_html__( 'Hotel template Widgets', 'hotel-review' ),
+		'id'            => 'sidebar-3',
+		'description'   => __('Widgets that will appear in the sidebar area of the site for Hotel Review pages.','hotel-review'),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
 }
 add_action( 'widgets_init', 'hotel_review_widgets_init' );
 
@@ -158,7 +167,7 @@ function hotel_review_scripts() {
         //wp_enqueue_style( 'hotel-review-layout-style' , get_template_directory_uri() . '/layouts/content-sidebar.css');
         
         wp_enqueue_style( 'hotel-review-bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css');
-        
+        wp_enqueue_style( 'hotel-review-fontawesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
         
         wp_enqueue_style( 'hotel-review-style', get_stylesheet_uri() );
 
@@ -167,28 +176,28 @@ function hotel_review_scripts() {
 	wp_enqueue_script( 'hotel-review-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
         wp_enqueue_script('hotel-review-masonry-settings', get_template_directory_uri() . '/js/masonry-settings.js', array('masonry'), '20151006', true);
         wp_enqueue_script( 'hotel-review-bootstrapjs', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js', array(), '20150807', true );
-        wp_enqueue_script( 'hotel-review-fotoramajs', 'http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js', array('jquery'), '20150807', true );
+        wp_enqueue_script( 'hotel-review-fotoramajs', 'http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js', array('jquery'), null, true );
         
+        wp_enqueue_script( 'hotel-review-googlemapsjs', 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&signed_in=true&key=AIzaSyAxGshykT3IeIaie-tTjRXrQqyLuKoKtoU', array(), null, true );
         
-        
+        wp_enqueue_script( 'hotel-review-lightboxjs', get_template_directory_uri() . '/js/jquery.lightbox_me.js', array('jquery'), null, true );
         
 
-        
-        
         wp_enqueue_style( 'hotel-review-googlefonts', 'http://fonts.googleapis.com/css?family=Lato:400,100,400italic,700,900,900italic|PT+Serif:400,400italic,700,700italic');
         
-	wp_enqueue_style( 'hotel-review-fontawesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
-        
+
 	wp_enqueue_style( 'hotel-review-fotorama', 'http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css');
-        
-        
- 
-        
         
         
 	wp_enqueue_script( 'hotel-review-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
         wp_enqueue_script( 'hotel-review-bootstrapjs', get_template_directory_uri() . 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js', array(), '20150807', true );
+        
+         
+        
+        
+        
+        
         
         
         
@@ -196,6 +205,8 @@ function hotel_review_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
+
+
 add_action( 'wp_enqueue_scripts', 'hotel_review_scripts' );
 
 /**

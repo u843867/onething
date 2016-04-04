@@ -6,8 +6,13 @@ get_header();
 ?>
 
 <div class="row">
-    <div class="col-md-8">
+<!--    empty column to get the page aligned correctly-->
+    <div class="col-sm-12 col-md-1 col-lg-2">
+    </div>
 
+  <div class="col-sm-12 col-md-7 col-lg-8">
+
+     
         <div id="primary" class="content-area">
             <main id="main" class="site-main" role="main">
 
@@ -26,11 +31,26 @@ get_header();
 
             </main><!-- #main -->
         </div><!-- #primary -->
+    
+   </div> <!-- #bootstrap col-md-8 -->
 
-    </div> <!-- #bootstrap col-md-8 -->
+   <div class="col-sm-12 col-md-4 col-lg-2">
+       
+       <?php get_sidebar(); ?>
+       
+       <?php // get_template_part('template-parts/content', 'hotel-sidebar'); ?>
+       
+        
+       
+       
 
-    <div class="col-md-4">
-        <?php get_sidebar(); ?>
+       
+      
     </div>
 
+    <div class="col-sm-0 col-md-0 col-lg-0">
+</div>
+    
     <?php get_footer(); ?>
+
+    </div>

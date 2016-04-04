@@ -16,9 +16,6 @@
     <div class="entry-content">
 
 
-
-
-
     <?php
     //get the url from the Hotel Review page.  Use the file_get_contents method to store the results in a variable.
     $hotel_array = (json_decode(file_get_contents(get_field('ean_hotel_information')), true));
@@ -34,28 +31,24 @@
     $hotel_star = $hotel_array[HotelInformationResponse][HotelSummary][hotelRating];
     $hotel_tripadvisor = $hotel_array[HotelInformationResponse][HotelSummary][tripAdvisorRatingUrl];
     $tripadvisor_review_count = $hotel_array[HotelInformationResponse][HotelSummary][tripAdvisorReviewCount];
+    
     $hotel_longitude = $hotel_array[HotelInformationResponse][HotelSummary][longitude];
+    $GLOBALS['hotel_longitude'] = $hotel_longitude;
+    
     $hotel_latitude = $hotel_array[HotelInformationResponse][HotelSummary][latitude];
+    $GLOBALS['hotel_latitude'] = $hotel_latitude;
+    
+    sort($hotel_array[HotelInformationResponse][PropertyAmenities]);
     $hotel_amenities = $hotel_array[HotelInformationResponse][PropertyAmenities][PropertyAmenity];
+    
     $hotel_images = $hotel_array[HotelInformationResponse][HotelImages][HotelImage];
     //var_dump($hotel_amenities);
    // var_dump($hotel_images);
     
+    global $googlemap;
+    $googlemap = '';
     
-    foreach ($hotel_amenities as $amenity){
-        foreach ($amenity as $item){
-            switch ($item){ 
-                case 2390:
-                    $hotel_wifi = true;  
-                case 14:
-                    $hotel_pool = true;   
-                case 51:
-                    $hotel_pets = true;   
-                case 2135:
-                    $hotel_sauna = true;   
-            }
-        }
-    }
+
     
     ?>
 
@@ -82,20 +75,104 @@
     } elseif ($hotel_star == 5) {
         $star = $fiveStar;
     }
+    ?>
+    
+<!--    row containing the top elements (Hotel names and quick facts)    -->
+    <div class="row row-top">
+    
+        <div class="col-sm-12 col-md-7 col-lg-7">
+            
+        <?php
+        if ($hotel_name) {
 
+            echo '<div class="info-box">';
 
-    if ($hotel_name) {
-      
-        echo '<div class="info-box">';
-        
-            echo('<h1 class="hotel">' . $hotel_name . '<span class = "gold">' . $star . '</span>' . '</h1>');
-            echo('<p class = "address">' . $hotel_address . '</p>');
-            //echo('<br>');
+                echo('<h2 class="hotel">' . $hotel_name . '<span class = "gold">' . $star . '</span>' . '</h2>');
+                echo('<p class = "address">' . $hotel_address . '</p>');
+                //echo('<br>');
+                        
+            echo '</div>';
+            
+            echo '<div class="tripadvisor">';
             echo ('<p><img src=' . $hotel_tripadvisor . '> (based on <span class = "blue">' . $tripadvisor_review_count . '</span>  reviews)</p>');
+            echo '</div>';
+            
+        }
+        ?>  
+                
+        </div>
         
-        echo '</div>';
-    }
+        <!--        div containing 'quick facts'-->
+        <div class="quickFacts col-sm-12 col-md-7 col-lg-7">
 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">facilities include...</h3>
+                    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                </div>
+                <div class="panel-body">
+                    <ul class="facilities">
+                        <?php
+                        foreach ($hotel_array[HotelInformationResponse][PropertyAmenities][1] as $amenity) {
+
+                            if ($amenity[amenityId] == 2422) {
+                                if ($parking == false) {
+                                    echo ('<li>' . '<i class="fa fa-check-square-o fa-lg"></i>' . '&nbsp' . 'Parking available' . '&nbsp&nbsp&nbsp&nbsp    ' . '</li>');
+                                }
+                                $parking = true;
+                            }
+
+                            if ($amenity[amenityId] == 3862) {
+                                if ($parking == false) {
+                                    echo ('<li>' . '<i class="fa fa-check-square-o fa-lg"></i>' . '&nbsp' . 'Parking available' . '&nbsp&nbsp&nbsp&nbsp    ' . '</li>');
+                                }
+                                $parking = true;
+                            }
+
+                            if ($amenity[amenityId] == 2390) {
+                                if ($wifi == false) {
+                                    echo ('<li>' . '<i class="fa fa-check-square-o fa-lg"></i>' . '&nbsp' . 'Free Wifi' . '&nbsp&nbsp&nbsp&nbsp    ' . '</li>');
+                                }
+                                $wifi = true;
+                            }
+
+                            if ($amenity[amenityId] == 2392) {
+                                if ($wifi == false) {
+                                    echo ('<li>' . '<i class="fa fa-check-square-o fa-lg"></i>' . '&nbsp' . 'Free Wifi' . '&nbsp&nbsp&nbsp&nbsp    ' . '</li>');
+                                }
+                                $wifi = true;
+                            }
+
+                            if ($amenity[amenityId] == 14) {
+                                echo ('<li>' . '<i class="fa fa-check-square-o fa-lg"></i>' . '&nbsp' . $amenity[amenity] . '&nbsp&nbsp&nbsp&nbsp   ' . '</li>');
+                            }
+
+//                         if ($amenity[amenityId] == 51)
+//                       {
+//                           echo ('<li>' . $amenity[amenity] . '</li>');
+//                       }
+
+                            if ($amenity[amenityId] == 2135) {
+                                echo ('<li>' . '<i class="fa fa-check-square-o fa-lg"></i>' . '&nbsp' . $amenity[amenity] . '&nbsp&nbsp&nbsp&nbsp    ' . '</li>');
+                            }
+
+                            
+                        }
+                        ?>
+                    </ul>
+                </div>
+
+
+
+
+            </div>   
+
+        </div>
+ 
+
+     
+        
+    <?php
     //if images have been added in the wordpress use them.
     if ($images) {
         $img_src = 'wp';
@@ -136,48 +213,49 @@
            
         }    
     }
-    ?>
+   
         
-        <?php 
+        
         
             if ($img_src == 'wp') {
                 $img_src = $image['sizes']['medium'];
             } 
             else {
                 $img_src = $images;
-            }
-                
-         ?>
+            }            
+    ?>
 
-    <br>
-    <hr>
-    <!-- Fotorama slider-->
-    <div class="fotorama"
-         data-width="100%"
-     data-ratio="800/600"
-     data-minwidth="200"
-     data-maxwidth="610"
-     data-minheight="150"
-     data-maxheight="100%">
-        <?php foreach ($img_src as $url) { ?>        
-            <img src=<?php echo $url; ?> />
-        <?php } ?>
+<!--    <br>-->
+    
+    <!--    div containing the photo slider-->
+        <div class="col-sm-12 col-md-7 col-lg-7">
+            <!--<hr>-->
+            <!-- Fotorama slider-->
+            <div class="fotorama"
+                 data-width="100%"
+             data-ratio="800/600"
+             data-minwidth="300"
+             data-maxwidth="900"
+             data-minheight="150"
+             data-maxheight="100%">
+                <?php foreach ($img_src as $url) { ?>        
+                    <img src=<?php echo $url; ?> />
+                <?php } ?>
 
-    </div>
+            </div>
+        </div>
+    
 
+        <div class="col-sm-12 col-md-5 col-lg-4">
+            <hr>
+            <?php get_template_part('template-parts/content', 'hotel-sidebar');?>
+            
+        </div> 
+    
+   
 
-    <br>
-    <hr>
-
-
-
-
-
-
-    <p>below here Isn't the gallery</p>
-    <br>
-
-
+<!--    <br>
+    <hr>-->
 
 
 <?php

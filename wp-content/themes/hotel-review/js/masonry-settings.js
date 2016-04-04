@@ -1,5 +1,20 @@
 // Masonry settings to organize footer widgets
 jQuery(document).ready(function($){
+    
+if ($(document).width() < 514) {
+        var tar = $('.panel-heading span.clickable');
+        if (!$('.panel-heading').hasClass('panel-collapsed')) {
+        // collapse the panel
+            tar.parents('.panel').find('.panel-body').slideUp();
+            tar.addClass('panel-collapsed');
+            tar.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+        }
+
+    };
+
+    
+    
+    
     var $container = $('#footer-widgets');
     var $masonryOn;
     var $columnWidth = 400;
@@ -32,10 +47,24 @@ jQuery(document).ready(function($){
         });
     };
     
-    //adding the gallery slider here to save enqueuing a new js file
-//    $('.bxslider').bxSlider({
-//        pagerCustom: '#bx-pager'
-//    });
+    //adding the Panel here to save enqueuing a new js file
+ jQuery(function ($) {
+        $('.panel-heading span.clickable').on("click", function (e) {
+            if ($(this).hasClass('panel-collapsed')) {
+                // expand the panel
+                $(this).parents('.panel').find('.panel-body').slideDown();
+                $(this).removeClass('panel-collapsed');
+                $(this).find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+            }
+            else {
+                // collapse the panel
+                $(this).parents('.panel').find('.panel-body').slideUp();
+                $(this).addClass('panel-collapsed');
+                $(this).find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+            }
+        });
+    });
+
 
 
 
